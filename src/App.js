@@ -326,14 +326,6 @@ const printTeams = () => {
               });
             }}
           />
-          <Input
-            value={editingStudent?.team}
-            onChange={(e) => {
-              setEditingStudent((pre) => {
-                return { ...pre, team: e.target.value };
-              });
-            }}
-          />
         </Modal>
       </header>
       </div>
