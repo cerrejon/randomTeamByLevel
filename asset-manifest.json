@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/randomTeamByLevel/static/css/main.6f3c4884.chunk.css",
-    "main.js": "/randomTeamByLevel/static/js/main.42bc465b.chunk.js",
-    "main.js.map": "/randomTeamByLevel/static/js/main.42bc465b.chunk.js.map",
+    "main.js": "/randomTeamByLevel/static/js/main.daebd1f0.chunk.js",
+    "main.js.map": "/randomTeamByLevel/static/js/main.daebd1f0.chunk.js.map",
     "runtime-main.js": "/randomTeamByLevel/static/js/runtime-main.5a3161f3.js",
     "runtime-main.js.map": "/randomTeamByLevel/static/js/runtime-main.5a3161f3.js.map",
     "static/css/2.98e7ac70.chunk.css": "/randomTeamByLevel/static/css/2.98e7ac70.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.98e7ac70.chunk.css",
     "static/js/2.9bdf3a32.chunk.js",
     "static/css/main.6f3c4884.chunk.css",
-    "static/js/main.42bc465b.chunk.js"
+    "static/js/main.daebd1f0.chunk.js"
   ]
 }
