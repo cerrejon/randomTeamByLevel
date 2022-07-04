@@ -291,7 +291,7 @@ const printTeams = () => {
         dataSource={dataSource}>
         </Table>
         <Modal
-          title="Edit Student"
+          title="Editar nivel"
           visible={isEditing}
           okText="Save"
           onCancel={() => {
