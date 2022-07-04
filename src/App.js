@@ -77,7 +77,7 @@ function App() {
     },
     {
       key: "2",
-      title: "Name",
+      title: "Nombre",
       dataIndex: "name",
     },
     {
@@ -87,7 +87,7 @@ function App() {
     },
     {
       key: "5",
-      title: "Actions",
+      title: "Editar",
       render: (record) => {
         return (
           <>
