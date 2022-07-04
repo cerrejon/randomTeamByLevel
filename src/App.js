@@ -187,6 +187,7 @@ const printTeams = () => {
     PrintTeamPair(pair);
     cont++;
   } else {
+    setTimeout(window.location.reload(false), 5000);
     alert("No hay más combinaciones");
   }
 };
