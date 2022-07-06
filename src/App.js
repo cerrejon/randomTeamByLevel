@@ -1,7 +1,7 @@
 import "antd/dist/antd.css";
 import "./App.css";
 import { Button, Table, Modal, Input } from "antd";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { EditOutlined } from "@ant-design/icons";
 let cont = 0;
 function App() {
@@ -102,27 +102,26 @@ function App() {
     },
   ];
 
- 
+  useEffect(() => {
+    setDataSource(() => {
+      return sameItem;
+    });
+  }, []);
+
   function FastAssignment(players) {
-
     const sorted = players.sort((a, b) => b.level - a.level);
-
     // init with first two highest skilled players
     let team_a = [sorted.shift()];
     let team_b = [sorted.shift()];
-
     // start tracking total skill for each team
     let score_a = team_a[0].level;
     let score_b = team_b[0].level;
-
     // check them 2 at a time
     // assumes array is always divisible by two
     while (sorted.length > 0) {
         let a = sorted.shift()
         let b = sorted.shift()
-
         let high, low;
-
         // figure out which is higher / lower
         if (a.level >= b.level) {
             high = a;
@@ -131,7 +130,6 @@ function App() {
             high = b;
             low = a;
         }
-
         // check total score for team
         // assign lower skilled player to higher scored team
         if (score_a >= score_b) {
@@ -146,10 +144,8 @@ function App() {
             score_b += low.level
         }
     }
-
     return [team_a, team_b]
 }
-
 
 function PrintTeamPair(pair) {
   const [team_a, team_b] = pair;
@@ -192,81 +188,9 @@ const printTeams = () => {
   }
 };
 
+if(localStorage.length === 0){window.localStorage.setItem("players",JSON.stringify(dataSource));}
+let sameItem = JSON.parse(localStorage.getItem("players"));
 
-
-
- 
- /////////////////////////////////
- /* const shuffle = (_xs) => {
-    const xs = [... _xs]
-    for (let i = xs .length; i --> 0; ) {
-      const j = Math .floor (Math .random () * i)
-      xs [i] = [xs [j], xs [j] = xs [i]] [0] // or any swap method
-    }
-    return xs
-  }
-
-  const sum = (ns) => ns.reduce((a, b) => a + b, 0);
-
-  const combinations = (xs, n) =>
-    xs.flatMap((x, i) =>
-      n === 1
-        ? [[x]]
-        : combinations(xs.slice(i + 1), n - 1).map((combo) => [x, ...combo])
-    );
-
-  const complement = (xs, ys) => xs.filter((x) => !ys.includes(x));
-
-  const splits = (fn, xs) =>
-    combinations(xs, Math.ceil(xs.length / 2))
-      .map((c) => [c, complement(xs, c)])
-      .reduce(
-        ({ all, uniq }, [a, b], _, __, ka = fn(a), kb = fn(b)) =>
-          uniq.has(ka) || uniq.has(kb)
-            ? { all, uniq }
-            : { all: all.concat([[a, b]]), uniq: uniq.add(ka).add(kb) },
-        { all: [], uniq: new Set() }
-      ).all;
-
-  // helper function
-  const skillTotal = (players) => sum(players.map((p) => p.level));
-
-  // main function
-  const nClosestSplits = (n, players, swap) => 
-  {
-      return shuffle(
-        splits(xs => xs.map(x => x.name).join('~'), players).map(([a, b]) => ({
-          teamA: a,
-          teamB: b,
-          scoreDiff: Math.abs(skillTotal(a) - skillTotal(b))
-        }))
-      )
-        .sort(({ scoreDiff: a }, { scoreDiff: b }) => a - b)
-        .slice(0, n);
-    }
-
-  // demo
-  const randonTeams = () => {
-    let aTeams = nClosestSplits(5, dataSource);
-    for(let i in aTeams){
-    setDataSource(() => {
-      return aTeams[i].teamA.concat(aTeams[i].teamB) ;
-    
-    });
-  }
-
-  }
- 
-/*
-  const onAddStudent = () => {
-    let a = dataSource.map((currElement, index) => {
-      var random = Math.floor(Math.random() * 5);
-      this.setState({ ...this.props.albums[random] });
-      return Object.values(dataSource[index])[2];
-    });
-    console.log(a);
-  };*/
-  
   const onEditStudent = (record) => {
     setIsEditing(true);
     setEditingStudent({ ...record });
@@ -301,6 +225,13 @@ const printTeams = () => {
             setDataSource((pre) => {
               return pre.map((student) => {
                 if (student.id === editingStudent.id) {
+                  for(var i = 0;i < sameItem.length; i++){
+                    if (dataSource[i].id === editingStudent.id) {
+                        sameItem[i].level = parseInt(editingStudent.level);
+                        break;
+                    }
+                }
+                localStorage.setItem('players',JSON.stringify(sameItem))
                   return editingStudent;
                 } else {
                   return student;
