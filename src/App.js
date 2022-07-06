@@ -3,6 +3,7 @@ import "./App.css";
 import { Button, Table, Modal, Input } from "antd";
 import { useState,useEffect } from "react";
 import { EditOutlined } from "@ant-design/icons";
+import background from "./img/futbol2.jpg";
 let cont = 0;
 function App() {
   const [isEditing, setIsEditing] = useState(false);
@@ -200,7 +201,7 @@ let sameItem = JSON.parse(localStorage.getItem("players"));
     setEditingStudent(null);
   };
   return (
-    <div className="App">
+    <div className="App" style={ { backgroundImage: `url(${background})`} }>
       <div>
       <header className="App-header">   
         <Button id="buttonTeams" onClick={printTeams}>Hacer equipos</Button>
