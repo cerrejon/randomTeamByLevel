@@ -228,6 +228,7 @@ let sameItem = JSON.parse(localStorage.getItem("players"));
                   for(var i = 0;i < sameItem.length; i++){
                     if (dataSource[i].id === editingStudent.id) {
                         sameItem[i].level = parseInt(editingStudent.level);
+                        sameItem[i].name = editingStudent.name;
                         break;
                     }
                 }
